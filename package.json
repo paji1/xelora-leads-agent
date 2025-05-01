@@ -1,0 +1,32 @@
+{
+  "name": "twilio-sms",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "devDependencies": {
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^22.15.2",
+    "@types/twilio": "^3.19.2",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.7.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@azure/identity": "^4.9.1",
+    "@azure/openai": "^2.0.0",
+    "@prisma/client": "^6.7.0",
+    "csv-parse": "^5.6.0",
+    "dotenv": "^16.5.0",
+    "mongoose": "^8.14.0",
+    "openai": "^4.96.0"
+  }
+}

@@ -1,0 +1,7 @@
+node_modules
+/.env
+generated
+/.DS_Store
+/.idea
+/.vscode
+data
