@@ -5,11 +5,100 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Company {
+    id                    String    @id @default(uuid())
+    name                  String    @unique
+    parentCompanyName     String?
+    description           String?
+    website               String?
+    phoneNumber           String?
+    faxNumber             String?
+    tollFreeNumber        String?
+    address               String?
+    city                  String?
+    state                 String?
+    zipCode               String?
+    county                String?
+    metroArea             String?
+    neighborhood          String?
+    squareFootage         Int?
+    locationType          String?
+    locationEmployeeSize  Int?
+    locationSalesVolume   Float?
+    corporateEmployeeSize Int?
+    corporateSalesVolume  Float?
+    establishedYear       Int?
+    yearsInDatabase       Int?
+    lastUpdatedOn         DateTime?
+    ein1                  String?
+    ein2                  String?
+    ein3                  String?
+    tickerSymbol          String?
+    stockExchange         String?
+    legalName             String?
+    recordType            String?
+    foreignParentFlag     Boolean?
+    message               String?
+    categoryId            String?
+
+    // Relations
+    category              Catogory?              @relation(fields: [categoryId], references: [id])
+    executives            Executive[]
+    sicCodes              SICCode[]
+    naicsCodes            NAICSCode[]
+    franchiseDescriptions FranchiseDescription[]
+}
+
+model Catogory {
+    id        String    @id @default(uuid())
+    name      String
+    companies Company[]
+}
+
+model Executive {
+    id        String  @id @default(uuid())
+    companyId String
+    firstName String
+    lastName  String
+    title     String?
+    gender    String?
+
+    company Company @relation(fields: [companyId], references: [id])
+}
+
+model SICCode {
+    id           String  @id @default(uuid())
+    companyId    String
+    code         String
+    description  String?
+    adSize       String?
+    yearAppeared Int?
+
+    company Company @relation(fields: [companyId], references: [id])
+}
+
+model NAICSCode {
+    id          String  @id @default(uuid())
+    companyId   String
+    code        String
+    description String?
+
+    company Company @relation(fields: [companyId], references: [id])
+}
+
+model FranchiseDescription {
+    id        String @id @default(uuid())
+    companyId String
+    value     String
+
+    company Company @relation(fields: [companyId], references: [id])
 }

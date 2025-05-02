@@ -1,20 +1,9 @@
-import {
-	DefaultAzureCredential,
-	getBearerTokenProvider,
-} from "@azure/identity";
-import type {
-	ChatCompletion,
-	ChatCompletionCreateParamsNonStreaming,
-} from "openai/resources/index";
-import { CompanyData } from "../types/company.type";
-import { initOpenAIClient } from "./openaiClient";
-import { clientAi } from "..";
+import { Company } from "@/generated/prisma";
 
-// keyless authentication
-
-// Initialize OpenAI API
-
-export async function generateMessage(company: CompanyData): Promise<string> {
+export async function generateMessage(
+	company: Company,
+	clientAi: any
+): Promise<string> {
 	const prompt = `
 You are a representative of Xelora, a tech agency that helps businesses improve their digital presence by creating or enhancing websites and integrating AI solutions. 
 Based on the following company details, craft a personalized message offering Xelora's services:
@@ -29,12 +18,10 @@ give him this link to book a meeting with me https://calendly.com/pajinew/xelora
 Make sure the message fits within 1 SMS (GSM-7: max 160 characters, or UCS-2: max 70 characters if using emojis or special characters). Avoid exceeding Twilio SMS length limits.
 Company Details:
 - Name: ${company.name}
-- Owner: ${company.ownerFirstName} ${company.ownerLastName}
 - Address: ${company.address || "Not provided"}
-- Email: ${company.ownerEmail || "Not provided"}
-- Phone: ${company.ownerPhone || "Not provided"}
 - Additional Info: ${JSON.stringify(company, null, 2)}
 
+from additional info  get custumized message for the company
 Message:
 `;
 
