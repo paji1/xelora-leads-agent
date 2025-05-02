@@ -22,6 +22,7 @@ export async function sendSms(
 	try {
 		// Ensure the company exists in the database
 
+		
 		const company = await ensureCompanyExists(companyData);
 
 		const result = await client.messages.create({

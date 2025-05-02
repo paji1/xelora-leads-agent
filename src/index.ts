@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import { connectToDatabase } from "./config/db";
 import { Company } from "./models/Company";
 
-import { companiesdata } from "./data/dummydata";
+import { companiesdata } from "./db/dummydata";
 import { twilioinit } from "./broadcasting/twilio";
 import { sendBulkSms } from "./broadcasting/sendBulks";
 import { initOpenAIClient } from "./openai/openaiClient";
